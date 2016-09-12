@@ -11,11 +11,23 @@ public class HuntResponse extends BaseResponse {
     @SerializedName("items")
     private Hunt hunt;
 
+    private boolean isFirstPage;
+
+
     public Hunt getHunt() {
         return hunt;
     }
 
     public void setHunt(Hunt hunt) {
         this.hunt = hunt;
+    }
+
+
+    public boolean isFirstPage() {
+        return isFirstPage;
+    }
+
+    public void setFirstPage(boolean firstPage) {
+        isFirstPage = firstPage;
     }
 }

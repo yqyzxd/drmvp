@@ -1,9 +1,11 @@
 package com.wind.base.mvp.view;
 
+import com.hannesdorfmann.mosby.mvp.MvpView;
+
 /**
  * Created by wind on 16/5/19.
  */
-public interface LoadingMvpView extends MvpView{
+public interface LoadingMvpView extends MvpView {
 
     /**
      * Show a view with a progress bar indicating a loading process.

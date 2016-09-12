@@ -4,7 +4,7 @@ import com.wind.data.base.BaseRequest;
 import com.wind.data.base.BaseResponse;
 
 import rx.Observable;
-import rx.Subscriber;
+import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -18,11 +18,16 @@ public abstract class Usecase<Q extends BaseRequest,R extends BaseResponse> {
 
 
     private  Subscription mSubscription= Subscriptions.empty();
-    public void execute(Q request,Subscriber<R> subscriber){
-         mSubscription=buildUsecaseObservable(request)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
+
+
+    public void execute(Q request, Observer<R> subscriber){
+            unsubscribe();
+
+            mSubscription = buildUsecaseObservable(request)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(subscriber);
+
     }
 
     protected abstract Observable<R> buildUsecaseObservable(Q request);
@@ -32,5 +37,6 @@ public abstract class Usecase<Q extends BaseRequest,R extends BaseResponse> {
         if (!mSubscription.isUnsubscribed()){
             mSubscription.unsubscribe();
         }
+
     }
 }

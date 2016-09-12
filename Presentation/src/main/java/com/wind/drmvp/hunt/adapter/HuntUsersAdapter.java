@@ -10,6 +10,7 @@ import com.wind.base.adapter.BaseAdapterHelper;
 import com.wind.base.adapter.QuickAdapter;
 import com.wind.data.base.bean.UserInfo;
 import com.wind.drmvp.R;
+import com.wind.drmvp.hunt.mvp.view.impl.LikeMvpLayout;
 import com.wind.drmvp.utils.ImageLoaderWrapper;
 
 import java.util.HashMap;
@@ -28,13 +29,13 @@ public class HuntUsersAdapter extends QuickAdapter<UserInfo> {
     private HashMap<String,Boolean> ellipsizeMap;
     @Override
     protected void convert(BaseAdapterHelper helper, final UserInfo item) {
-        final ImageView avatar=(ImageView) helper.getView(R.id.iv_avatar);
+        final ImageView avatar=helper.getView(R.id.iv_avatar);
         setAvatar(avatar,item);
 
 
         ImageView cover=helper.getView(R.id.iv_cover);
         String coverUrl=item.getBaseUserInfo().getCover().getImg().getUrl();
-        //cover.setTag(coverUrl);
+
 
 
         //使用Gilde
@@ -114,12 +115,15 @@ public class HuntUsersAdapter extends QuickAdapter<UserInfo> {
         }else{
             helper.setImageResource(R.id.iv_like, R.drawable.my_like);
         }
-        helper.setOnClickListener(R.id.iv_like, new View.OnClickListener() {
+       /* helper.setOnClickListener(R.id.iv_like, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onLikeUnlikeClickListener.onLikeUnlike(item);
             }
-        });
+        });*/
+
+        LikeMvpLayout view_like=helper.getView(R.id.view_like);
+        view_like.setUser(item);
 
         if (item.getStatus().getMember_fees_status()==1){
             helper.getView(R.id.iv_vip).setVisibility(View.VISIBLE);
@@ -180,31 +184,6 @@ public class HuntUsersAdapter extends QuickAdapter<UserInfo> {
 
     private void setAvatar(ImageView avatar,UserInfo item) {
         avatar.setTag(item.getBaseUserInfo().getAvatar().getImg().getUrl());
-       /* if (item.getBaseUserInfo().getGender()==0){
-            ImageLoader.getInstance().displayImage(item.getBaseUserInfo().getAvatar().getImg().getUrl(), avatar, manAvatarImageOptions, new SimpleImageLoadingListener() {
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    if (view.getTag()!=null){
-                        if (view.getTag().equals(imageUri)) {
-                            ((ImageView)view).setImageBitmap(loadedImage);
-                        }
-                    }
-                }
-            });
-        }else {
-            ImageLoader.getInstance().displayImage(item.getBaseUserInfo().getAvatar().getImg().getUrl(), avatar, womenAvatarImageOptions, new SimpleImageLoadingListener() {
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    if (view.getTag()!=null){
-                        if (view.getTag().equals(imageUri)) {
-                            ((ImageView)view).setImageBitmap(loadedImage);
-                        }
-                    }
-
-                }
-            });
-        }*/
-
     }
 
 

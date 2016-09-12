@@ -2,6 +2,8 @@ package com.wind.drmvp.base.di;
 
 import com.wind.drmvp.hunt.di.HuntComponent;
 import com.wind.drmvp.hunt.di.HuntModule;
+import com.wind.drmvp.hunt.di.LikeComponent;
+import com.wind.drmvp.hunt.di.LikeModule;
 import com.wind.drmvp.login.di.LoginComponent;
 import com.wind.drmvp.login.di.LoginModule;
 
@@ -17,4 +19,6 @@ import dagger.Component;
 public interface AppComponent {
     LoginComponent plus(LoginModule loginModule);
     HuntComponent plus(HuntModule huntModule);
+
+    LikeComponent plus(LikeModule likeModule);
 }

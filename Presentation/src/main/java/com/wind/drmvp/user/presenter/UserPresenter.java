@@ -1,48 +1,42 @@
 package com.wind.drmvp.user.presenter;
 
-import com.wind.base.mvp.presenter.MvpBasePresenter;
-import com.wind.data.base.BaseResponse;
+import com.wind.data.base.BaseRequest;
 import com.wind.data.login.request.LoginRequest;
 import com.wind.data.login.response.LoginResponse;
 import com.wind.domain.Usecase;
+import com.wind.domain.UsecaseCompoment;
+import com.wind.domain.UsecaseManager;
 import com.wind.domain.user.interactor.UserUsecase;
+import com.wind.drmvp.base.ExecutePresenter;
+import com.wind.drmvp.user.subscriber.UserSubscribe;
 import com.wind.drmvp.user.view.UserView;
-
-import rx.Subscriber;
 
 /**
  * Created by wind on 16/5/23.
  */
-public class UserPresenter<V extends UserView>  extends MvpBasePresenter<V>{
+public class UserPresenter<V extends UserView>  extends ExecutePresenter<V> {
 
     private Usecase<LoginRequest,LoginResponse> usecase;
-
+    private UsecaseManager manager;
     public UserPresenter(UserUsecase usecase){
         this.usecase=usecase;
+
     }
 
-    public void getLoginUser() {
-        usecase.execute(null,new UserSubscribe());
+    @Override
+    public void attachView(V mvpView) {
+        super.attachView(mvpView);
+        manager=new UsecaseManager();
+        manager.addUsercaseCompoment(new UsecaseCompoment(new UserSubscribe(this.getView()),usecase));
+
+    }
+
+    @Override
+    public void execute(BaseRequest request) {
+       // usecase.execute(request,new UserSubscribe(this.getView()));
+        manager.execute(request);
     }
 
 
-    private final class UserSubscribe extends Subscriber<LoginResponse>{
-        @Override
-        public void onCompleted() {
-        }
 
-        @Override
-        public void onError(Throwable e) {
-
-        }
-
-        @Override
-        public void onNext(LoginResponse response) {
-            if (isViewAttached()){
-                if (response.getErrCode()== BaseResponse.CODE_SUCCESS){
-                    getView().getLoginUserReturn(response);
-                }
-            }
-        }
-    }
 }

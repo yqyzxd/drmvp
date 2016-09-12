@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.EditText;
 
-import com.wind.base.mvp.view.MvpFragment;
+import com.wind.base.mvp.view.DaggerMvpFragment;
 import com.wind.base.utils.ToastUtil;
 import com.wind.data.login.request.LoginRequest;
 import com.wind.data.login.response.LoginResponse;
@@ -22,7 +22,7 @@ import butterknife.OnClick;
 /**
  * Created by wind on 16/5/18.
  */
-public class LoginFragment extends MvpFragment<LoginView,LoginPresenter,LoginComponent> implements LoginView{
+public class LoginFragment extends DaggerMvpFragment<LoginView,LoginPresenter,LoginComponent> implements LoginView{
     @Bind(R.id.et_username)
     EditText et_username;
     @Bind(R.id.et_password)
@@ -34,12 +34,12 @@ public class LoginFragment extends MvpFragment<LoginView,LoginPresenter,LoginCom
     }
 
     @Override
-    protected LoginPresenter createPresenter() {
+    public LoginPresenter createPresenter() {
         return getComponent().presenter();
     }
 
     @Override
-    protected int getLayoutRes() {
+    public int getLayoutRes() {
         return R.layout.login_fragment;
     }
 
@@ -62,13 +62,15 @@ public class LoginFragment extends MvpFragment<LoginView,LoginPresenter,LoginCom
         LoginRequest request=new LoginRequest();
         request.setUsername(username);
         request.setPassword(password);
-        presenter.login(request);
+       // presenter.login(request);
+        presenter.execute(request);
     }
 
     @Override
     public void loginSuccess(LoginResponse response) {
         ToastUtil.showToast(getActivity(),"登录成功");
         Navigator.startHuntActivity(getActivity());
+        //Log.e("LoginFragment","loginSuccess");
     }
 
     @Override

@@ -1,53 +1,42 @@
 package com.wind.drmvp.login.mvp.presenter;
 
-import com.wind.base.mvp.presenter.MvpBasePresenter;
-import com.wind.data.base.BaseResponse;
+import com.wind.data.base.BaseRequest;
 import com.wind.data.login.request.LoginRequest;
 import com.wind.data.login.response.LoginResponse;
 import com.wind.domain.Usecase;
-import com.wind.drmvp.base.App;
+import com.wind.domain.UsecaseCompoment;
+import com.wind.domain.UsecaseManager;
+import com.wind.drmvp.base.ExecutePresenter;
 import com.wind.drmvp.login.mvp.view.LoginView;
+import com.wind.drmvp.login.subscriber.LoginSubscriber;
 
 import javax.inject.Inject;
-
-import rx.Subscriber;
 
 /**
  * Created by wind on 16/5/18.
  */
-public class LoginPresenter extends MvpBasePresenter<LoginView> {
+public class LoginPresenter extends ExecutePresenter<LoginView> {
 
     Usecase<LoginRequest,LoginResponse> usecase;
+    UsecaseManager manager;
     @Inject
     public LoginPresenter(Usecase<LoginRequest,LoginResponse> usecase){
         this.usecase=usecase;
+
+    }
+
+    @Override
+    public void attachView(LoginView mvpView) {
+        super.attachView(mvpView);
+        manager=new UsecaseManager();
+        manager.addUsercaseCompoment(new UsecaseCompoment(new LoginSubscriber(getView()),usecase));
     }
 
 
-    public void login(LoginRequest loginRequest) {
-       this.usecase.execute(loginRequest,new LoginSubscriber());
+    @Override
+    public void execute(BaseRequest request){
+        this.manager.execute(request);
     }
 
 
-
-    private final class LoginSubscriber extends Subscriber<LoginResponse> {
-
-        @Override public void onCompleted() {
-        }
-
-        @Override public void onError(Throwable e) {
-
-            showNetworkError(App.get());
-        }
-
-        @Override public void onNext(LoginResponse response) {
-            if (isViewAttached()){
-                if (response.getErrCode()== BaseResponse.CODE_SUCCESS){
-                    getView().loginSuccess(response);
-                }else {
-                    getView().loginError(response.getErrMsg());
-                }
-            }
-        }
-    }
 }

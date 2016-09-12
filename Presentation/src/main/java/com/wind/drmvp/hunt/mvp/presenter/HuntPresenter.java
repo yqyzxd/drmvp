@@ -1,56 +1,50 @@
 package com.wind.drmvp.hunt.mvp.presenter;
 
-import com.wind.data.base.BaseResponse;
+import com.wind.data.base.BaseRequest;
 import com.wind.data.hunt.request.HuntRequest;
 import com.wind.data.hunt.response.HuntResponse;
 import com.wind.domain.Usecase;
+import com.wind.domain.UsecaseCompoment;
+import com.wind.domain.UsecaseManager;
 import com.wind.domain.user.interactor.UserUsecase;
-import com.wind.drmvp.base.App;
+import com.wind.drmvp.base.ExecutePresenter;
 import com.wind.drmvp.hunt.mvp.view.HuntView;
-import com.wind.drmvp.user.presenter.UserPresenter;
+import com.wind.drmvp.hunt.subscriber.HuntSubscriber;
+import com.wind.drmvp.user.subscriber.UserSubscribe;
 
 import javax.inject.Inject;
-
-import rx.Subscriber;
 
 
 /**
  * Created by wind on 16/5/20.
  */
-public class HuntPresenter extends UserPresenter<HuntView> {
+public class HuntPresenter extends ExecutePresenter<HuntView> {
 
     private Usecase<HuntRequest,HuntResponse> usecase;
-
+    private UsecaseManager usecaseManager;
+    private UserUsecase userUsecase;
     @Inject
     public HuntPresenter(Usecase<HuntRequest,HuntResponse> usecase, UserUsecase userUsecase){
-        super(userUsecase);
         this.usecase=usecase;
+        this.userUsecase=userUsecase;
+
+
     }
 
-    public void getUserList(HuntRequest request) {
-        this.usecase.execute(request,new HuntSubscriber());
+    @Override
+    public void attachView(HuntView mvpView) {
+        super.attachView(mvpView);
+        usecaseManager=new UsecaseManager();
+        usecaseManager
+                .addUsercaseCompoment(new UsecaseCompoment(new HuntSubscriber(getView()),usecase))
+                .addUsercaseCompoment(new UsecaseCompoment(new UserSubscribe(getView()),userUsecase));
+    }
+
+    @Override
+    public void execute(BaseRequest request){
+        this.usecaseManager.execute(request);
     }
 
 
 
-    private final class HuntSubscriber extends Subscriber<HuntResponse> {
-
-        @Override public void onCompleted() {
-        }
-
-        @Override public void onError(Throwable e) {
-            e.printStackTrace();
-            showNetworkError(App.get());
-        }
-
-        @Override public void onNext(HuntResponse response) {
-            if (isViewAttached()){
-                if (response.getErrCode()== BaseResponse.CODE_SUCCESS){
-                    getView().showUsers(response);
-                }else {
-                    getView().showError(response.getErrMsg());
-                }
-            }
-        }
-    }
 }

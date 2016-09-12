@@ -16,6 +16,9 @@ import retrofit2.Retrofit;
 public class HuntDataStoreFactory {
     private ICache cache;
     private Retrofit retrofit;
+
+    private HuntCloudDataStore cloudDataStore;
+
     @Inject
     public HuntDataStoreFactory(Retrofit retrofit,ICache cache){
         this.cache=cache;
@@ -25,9 +28,9 @@ public class HuntDataStoreFactory {
     public DataStore create(HuntRequest request) {
         DataStore dataStore=null;
         int loadFrom=request.getLoadFrom();
-
+        boolean isFirstPage=request.isFirstPage();
         if (BaseRequest.LOAD_FROM_WEB==loadFrom){
-            dataStore = createCloudDataStore(retrofit);
+            dataStore = createCloudDataStore(retrofit,isFirstPage);
             return dataStore;
         }
         if (BaseRequest.LOAD_FROM_LOCAL==loadFrom ||!this.cache.isExpired() && this.cache.isCached()) {
@@ -35,16 +38,20 @@ public class HuntDataStoreFactory {
             //dataStore = new DiskUserDataStore();
         } else {
             //LogUtils.e("CloudDataStore","use CloudDataStore");
-            dataStore = createCloudDataStore(retrofit);
+            dataStore = createCloudDataStore(retrofit,isFirstPage);
         }
         return dataStore;
 
 
     }
 
-    private DataStore createCloudDataStore(Retrofit retrofit) {
-        HuntApi api=retrofit.create(HuntApi.class);
-        return new HuntCloudDataStore(api);
+    private DataStore createCloudDataStore(Retrofit retrofit,boolean isFirstPage) {
+        if (cloudDataStore==null){
+            HuntApi api=retrofit.create(HuntApi.class);
+            cloudDataStore=new HuntCloudDataStore(api);
+        }
+        cloudDataStore.setFirstPage(isFirstPage);
+        return cloudDataStore;
     }
 
 

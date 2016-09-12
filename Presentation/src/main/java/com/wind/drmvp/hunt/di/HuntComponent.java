@@ -16,4 +16,6 @@ import dagger.Subcomponent;
 public interface HuntComponent extends BaseMvpComponent<HuntView,HuntPresenter> {
 
     void inject(HuntFragment huntFragment);
+
+
 }

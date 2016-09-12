@@ -11,6 +11,8 @@ public class HuntRequest extends BaseRequest {
     private int page;
     private int count;
 
+    private boolean isFirstPage;
+
 
     public int getPage() {
         return page;
@@ -26,5 +28,13 @@ public class HuntRequest extends BaseRequest {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public boolean isFirstPage() {
+        return isFirstPage;
+    }
+
+    public void setFirstPage(boolean firstPage) {
+        isFirstPage = firstPage;
     }
 }

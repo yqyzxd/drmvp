@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.stetho.Stetho;
 import com.frogermcs.androiddevmetrics.AndroidDevMetrics;
+import com.wind.data.base.bean.UserInfo;
 import com.wind.drmvp.base.di.AppComponent;
 import com.wind.drmvp.base.di.AppModule;
 import com.wind.drmvp.base.di.DaggerAppComponent;
@@ -14,6 +15,8 @@ import com.wind.drmvp.base.di.DaggerAppComponent;
 public class App extends Application {
     private static App sInstance;
     private AppComponent mAppComponent;
+    private UserInfo mLoginUser;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -52,5 +55,15 @@ public class App extends Application {
 
     public AppComponent appComponent(){
         return mAppComponent;
+    }
+
+
+
+    public void setLoginUser(UserInfo loginUser) {
+        this.mLoginUser = loginUser;
+    }
+
+    public UserInfo getLoginUser() {
+        return mLoginUser;
     }
 }

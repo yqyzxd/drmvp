@@ -290,13 +290,15 @@
                />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iv_like"
+
+        <com.wind.drmvp.hunt.mvp.view.impl.LikeMvpLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:padding="16dp"
-             />
+            android:id="@+id/view_like"/>
+
+
     </RelativeLayout>
 
 

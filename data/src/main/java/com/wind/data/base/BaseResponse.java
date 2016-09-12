@@ -1,7 +1,5 @@
 package com.wind.data.base;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Created by wind on 16/5/19.
  */
@@ -14,14 +12,12 @@ public class BaseResponse {
      * 错误码
      */
 
-    @SerializedName("err")
-    public int errCode;
+    private int err;
 
     /**
      * 错误信息
      */
-    @SerializedName("msg")
-    public String errMsg;
+    private String msg;
 
     /**
      * 时间戳
@@ -29,19 +25,20 @@ public class BaseResponse {
     public String timestamp;
 
     public int getErrCode() {
-        return errCode;
+        return err;
     }
 
-    public void setErrCode(int errCode) {
-        this.errCode = errCode;
+
+    public void setErr(int err) {
+        this.err = err;
     }
 
     public String getErrMsg() {
-        return errMsg;
+        return msg;
     }
 
-    public void setErrMsg(String errMsg) {
-        this.errMsg = errMsg;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public String getTimestamp() {
@@ -51,5 +48,4 @@ public class BaseResponse {
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
-
 }
