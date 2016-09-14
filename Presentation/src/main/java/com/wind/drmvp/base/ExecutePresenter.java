@@ -23,4 +23,16 @@ public abstract class ExecutePresenter<V extends MvpView> extends MvpBasePresent
         manager.execute(request);
     }
 
+
+    @Override
+    public void detachView(boolean retainInstance) {
+        super.detachView(retainInstance);
+        if (!retainInstance) {
+            cancelSubscription();
+        }
+    }
+
+    private void cancelSubscription() {
+        manager.cancelSubscription();
+    }
 }

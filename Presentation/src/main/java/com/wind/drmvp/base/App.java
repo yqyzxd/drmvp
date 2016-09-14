@@ -23,7 +23,7 @@ public class App extends Application {
         setInstance(this);
         debug();
 
-
+        
         mAppComponent = createComponent();
     }
 

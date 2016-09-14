@@ -2,7 +2,6 @@ package com.wind.data.login.datastore;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.squareup.sqlbrite.BriteDatabase;
@@ -39,7 +38,7 @@ public class LoginUserDbDataStore {
 
                 mBriteDb.insert(LoginUser.TABLE_NAME, marshal.json_user(jsonUser).asContentValues(),
                         SQLiteDatabase.CONFLICT_REPLACE);
-            Log.e(TAG,"putLoginUser success");
+            //Log.e(TAG,"putLoginUser success");
             transaction.markSuccessful();
         } finally {
             transaction.end();
@@ -52,13 +51,12 @@ public class LoginUserDbDataStore {
                 .map(new Func1<SqlBrite.Query, LoginResponse>() {
                     @Override
                     public LoginResponse call(SqlBrite.Query query) {
-                       // return LoginUser.MAPPER;
                         try {
                             Cursor cursor=query.run();
                             if (cursor.moveToLast()){
                                 LoginUserModel model = LoginUser.MAPPER.map(cursor);
                                 String json = model.json_user();
-                                Log.e(TAG, "getLoginUser" + json);
+                                //Log.e(TAG, "getLoginUser" + json);
                                 Gson gson = new Gson();
                                 return gson.fromJson(json, LoginResponse.class);
                             }else {

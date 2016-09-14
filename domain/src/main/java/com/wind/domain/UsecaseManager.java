@@ -5,7 +5,9 @@ import android.support.annotation.NonNull;
 import com.wind.data.base.BaseRequest;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by wind on 16/9/11.
@@ -45,5 +47,16 @@ public class UsecaseManager {
     private UsecaseCompoment getUsecaseForRequestType(BaseRequest request) {
         //Log.e("UsecaseManager","request.getClass():"+request.getClass());
         return usecases.get(request.getClass());
+    }
+
+    public void cancelSubscription() {
+
+        Set<Map.Entry<Class,UsecaseCompoment>> entrySet=usecases.entrySet();
+        Iterator<Map.Entry<Class,UsecaseCompoment>>  it=entrySet.iterator();
+        while (it.hasNext()){
+            Map.Entry<Class,UsecaseCompoment> entry=it.next();
+            entry.getValue().getUsecase().unsubscribe();
+        }
+
     }
 }

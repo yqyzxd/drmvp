@@ -10,6 +10,7 @@ import com.wind.base.adapter.BaseAdapterHelper;
 import com.wind.base.adapter.QuickAdapter;
 import com.wind.data.base.bean.UserInfo;
 import com.wind.drmvp.R;
+import com.wind.drmvp.hunt.mvp.view.impl.ChatMvpLayout;
 import com.wind.drmvp.hunt.mvp.view.impl.LikeMvpLayout;
 import com.wind.drmvp.utils.ImageLoaderWrapper;
 
@@ -110,20 +111,9 @@ public class HuntUsersAdapter extends QuickAdapter<UserInfo> {
 
         helper.setText(R.id.tv_constellation, item.getBaseUserInfo().getConstellation());
         //我是否已关注TA
-        if (item.getStatus().getLiked()==0){
-            helper.setImageResource(R.id.iv_like, R.drawable.my_unlike);
-        }else{
-            helper.setImageResource(R.id.iv_like, R.drawable.my_like);
-        }
-       /* helper.setOnClickListener(R.id.iv_like, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onLikeUnlikeClickListener.onLikeUnlike(item);
-            }
-        });*/
-
         LikeMvpLayout view_like=helper.getView(R.id.view_like);
         view_like.setUser(item);
+
 
         if (item.getStatus().getMember_fees_status()==1){
             helper.getView(R.id.iv_vip).setVisibility(View.VISIBLE);
@@ -152,10 +142,7 @@ public class HuntUsersAdapter extends QuickAdapter<UserInfo> {
         }else {
             ll_recommend.setVisibility(View.VISIBLE);
             line.setVisibility(View.VISIBLE);
-            //0男1女
-           // String gender=item.getBaseUserInfo().getGender()==0?"男":"女";
-           // helper.setText(R.id.tv_high_quality, context.getResources().getString(R.string.high_quality_person,gender ));
-            //helper.setText(R.id.tv_recommend,"推荐理由:"+item.getStatus().getRecommendedReason());
+
         }
 
         View iv_online=helper.getView(R.id.iv_online);
@@ -172,13 +159,8 @@ public class HuntUsersAdapter extends QuickAdapter<UserInfo> {
 
 
 
-
-        helper.setOnClickListener(R.id.tv_chat, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // EventBus.getDefault().post(new ChatEvent(item));
-            }
-        });
+       ChatMvpLayout chatMvpLayout= helper.getView(R.id.view_chat);
+        chatMvpLayout.setUser(item);
 
     }
 

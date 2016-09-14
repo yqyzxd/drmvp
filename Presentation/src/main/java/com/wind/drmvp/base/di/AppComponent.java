@@ -1,5 +1,7 @@
 package com.wind.drmvp.base.di;
 
+import com.wind.drmvp.hunt.di.ChatComponent;
+import com.wind.drmvp.hunt.di.ChatModule;
 import com.wind.drmvp.hunt.di.HuntComponent;
 import com.wind.drmvp.hunt.di.HuntModule;
 import com.wind.drmvp.hunt.di.LikeComponent;
@@ -21,4 +23,5 @@ public interface AppComponent {
     HuntComponent plus(HuntModule huntModule);
 
     LikeComponent plus(LikeModule likeModule);
+    ChatComponent plus(ChatModule likeModule);
 }

@@ -69,7 +69,6 @@ public class LikeMvpLayout  extends MvpLinearLayout<LikeView,LikePresenter> impl
                 .plus(new LikeModule(this));
     }
     private void injectDependencies() {
-      //  mComponent = ((HasComponent<C>) getActivity()).getComponent();
         inject();
     }
 
@@ -82,7 +81,10 @@ public class LikeMvpLayout  extends MvpLinearLayout<LikeView,LikePresenter> impl
         return mComponent.presenter();
     }
 
-
+    @Override
+    public LikeComponent getComponent() {
+        return mComponent;
+    }
     @OnClick(R.id.iv_like)
     public void onViewClick(View v){
         switch (v.getId()){
@@ -164,8 +166,5 @@ public class LikeMvpLayout  extends MvpLinearLayout<LikeView,LikePresenter> impl
         ToastUtil.showToast(getContext(),"like failed");
     }
 
-    @Override
-    public LikeComponent getComponent() {
-        return mComponent;
-    }
+
 }
