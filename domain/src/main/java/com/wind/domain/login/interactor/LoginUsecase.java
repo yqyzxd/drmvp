@@ -1,11 +1,11 @@
 package com.wind.domain.login.interactor;
 
-import com.wind.data.base.BaseResponse;
+import com.wind.base.response.BaseResponse;
 import com.wind.data.login.api.LoginApi;
 import com.wind.data.login.datastore.LoginUserDbDataStore;
 import com.wind.data.login.request.LoginRequest;
 import com.wind.data.login.response.LoginResponse;
-import com.wind.domain.Usecase;
+import com.wind.base.usecase.Usecase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +52,7 @@ public class LoginUsecase extends Usecase<LoginRequest,LoginResponse> {
         paramMap.put("country_code","86");
         paramMap.put(LoginRequest.FIELD_USERNAME,request.getUsername());
         paramMap.put(LoginRequest.FIELD_PASSWORD,request.getPassword());
-        paramMap.put("version","141");
+        paramMap.put("version","1.41");
         return paramMap;
     }
 }

@@ -1,5 +1,6 @@
 package com.wind.data.hunt.bean;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.google.gson.annotations.SerializedName;
 import com.wind.data.base.bean.UserInfo;
 
@@ -10,10 +11,13 @@ import java.util.List;
  */
 public class Hunt {
     @SerializedName("max_time")
+    @JSONField(name = "max_time")
     private String timestamp;
+    @JSONField(name = "order_rand")
     @SerializedName("order_rand")
     private String orderRand;
     @SerializedName("user")
+    @JSONField(name = "user")
     private List<UserInfo> userInfos;
 
     public String getTimestamp() {

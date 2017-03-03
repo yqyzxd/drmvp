@@ -1,12 +1,15 @@
 package com.wind.drmvp.user.subscriber;
 
-import com.wind.data.base.BaseResponse;
+import android.util.Log;
+
+import com.wind.base.response.BaseResponse;
 import com.wind.data.login.response.LoginResponse;
 import com.wind.drmvp.user.view.UserView;
 
 import rx.Subscriber;
 
 public class UserSubscribe extends Subscriber<LoginResponse> {
+    public static final String TAG="UserSubscribe";
     private UserView userView;
 
     public UserSubscribe(UserView userView) {
@@ -19,7 +22,7 @@ public class UserSubscribe extends Subscriber<LoginResponse> {
 
     @Override
     public void onError(Throwable e) {
-
+        Log.e(TAG,"onError");
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.wind.data;
 
-import com.wind.data.base.BaseRequest;
-import com.wind.data.base.BaseResponse;
+import com.wind.base.request.BaseRequest;
+import com.wind.base.response.BaseResponse;
 
 import rx.Observable;
 

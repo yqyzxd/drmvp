@@ -1,11 +1,11 @@
 package com.wind.drmvp.login.mvp.presenter;
 
-import com.wind.data.base.BaseRequest;
+import com.wind.base.request.BaseRequest;
 import com.wind.data.login.request.LoginRequest;
 import com.wind.data.login.response.LoginResponse;
-import com.wind.domain.Usecase;
-import com.wind.domain.UsecaseCompoment;
-import com.wind.domain.UsecaseManager;
+import com.wind.base.usecase.Usecase;
+import com.wind.base.usecase.UsecaseCompoment;
+import com.wind.base.usecase.UsecaseManager;
 import com.wind.drmvp.base.ExecutePresenter;
 import com.wind.drmvp.login.mvp.view.LoginView;
 import com.wind.drmvp.login.subscriber.LoginSubscriber;

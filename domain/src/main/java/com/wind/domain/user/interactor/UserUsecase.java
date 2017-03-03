@@ -3,7 +3,7 @@ package com.wind.domain.user.interactor;
 import com.wind.data.login.datastore.LoginUserDbDataStore;
 import com.wind.data.login.request.LoginRequest;
 import com.wind.data.login.response.LoginResponse;
-import com.wind.domain.Usecase;
+import com.wind.base.usecase.Usecase;
 
 import javax.inject.Inject;
 

@@ -1,6 +1,6 @@
 package com.wind.data.hunt.cache;
 
-import com.wind.data.base.BaseResponse;
+import com.wind.base.response.BaseResponse;
 import com.wind.data.base.cache.ICache;
 
 import java.io.File;

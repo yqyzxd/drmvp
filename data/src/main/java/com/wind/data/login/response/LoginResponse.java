@@ -1,7 +1,7 @@
 package com.wind.data.login.response;
 
 import com.google.gson.annotations.SerializedName;
-import com.wind.data.base.BaseResponse;
+import com.wind.base.response.BaseResponse;
 import com.wind.data.base.bean.UserInfo;
 
 

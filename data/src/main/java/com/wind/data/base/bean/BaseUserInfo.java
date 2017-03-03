@@ -1,5 +1,6 @@
 package com.wind.data.base.bean;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -20,10 +21,13 @@ public class BaseUserInfo implements Serializable {
     private String birthday;
     private String high;
     @SerializedName("annual_income")
+    @JSONField(name = "annual_income")
     private String annualIncome;
+    @JSONField(name = "create_time")
     @SerializedName("create_time")
     private long createTime;
     private String abode;
+    @JSONField(name = "plan_marry_time")
     @SerializedName("plan_marry_time")
     private String planMarryTime;
 
@@ -37,9 +41,11 @@ public class BaseUserInfo implements Serializable {
     private String education;
 
     @SerializedName("native_place")
+    @JSONField(name = "native_place")
     private String native_place;
 
     @SerializedName("marital_status")
+    @JSONField(name = "marital_status")
     private String maritalStatus;
 
     private String job;
@@ -50,9 +56,11 @@ public class BaseUserInfo implements Serializable {
 
     private String smoke;
     @SerializedName("family_ranking")
+    @JSONField(name = "family_ranking")
     private String familyRanking;
 
     @SerializedName("children_status")
+    @JSONField(name = "children_status")
     private String childrenStatus;
 
     private String weight;
@@ -61,19 +69,24 @@ public class BaseUserInfo implements Serializable {
 
     private Photo avatar;
     @SerializedName("about_me")
+    @JSONField(name = "about_me")
     private String aboutMe;
 
     @SerializedName("house_status")
+    @JSONField(name = "house_status")
     private String houseStatus;
 
 
     @SerializedName("house_number")
+    @JSONField(name = "house_number")
     private int houseNumber;
 
     @SerializedName("car_status")
+    @JSONField(name = "car_status")
     private String carStatus;
 
     @SerializedName("car_number")
+    @JSONField(name = "car_number")
     private int carNumber;
    // private int isIdentityAuth;
 
@@ -86,6 +99,7 @@ public class BaseUserInfo implements Serializable {
     private Photo cover;
 
     @SerializedName("photo_count")
+    @JSONField(name = "photo_count")
     private  int photoCount;
 
 

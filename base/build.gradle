@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         minSdkVersion 14
@@ -22,6 +22,16 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    compile presentationDependencies.rxJava
+    compile presentationDependencies.rxAndroid
+
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+
+    compile 'com.alibaba:fastjson:1.1.52.android'
+    compile 'com.zhy:okhttputils:2.6.2'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.google.dagger:dagger:2.0.2'
     compile 'com.jakewharton:butterknife:7.0.1'

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme_Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--<item name="gallery_ucrop_title_text">@string/gallery_ucrop_menu_crop</item>-->
+    </style>
+
+    <style name="Theme_Light.Default"/>
+
+    <style name="Theme_Light.White">
+        <item name="gallery_toolbar_bg">@color/colorPrimary</item>
+        <item name="gallery_toolbar_close_color">#2A2A2F</item>
+        <item name="gallery_toolbar_text_color">#2A2A2F</item>
+        <item name="gallery_page_bg">#FFFFFF</item>
+        <item name="gallery_default_image">@mipmap/ic_launcher</item>
+        <item name="gallery_imageview_bg">#FFFFFF</item>
+    </style>
+
+
+</resources>

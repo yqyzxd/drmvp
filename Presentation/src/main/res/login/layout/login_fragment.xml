@@ -9,7 +9,7 @@
         android:id="@+id/et_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="17701316631"
+        android:text="15968178299"
         android:layout_marginTop="50dp"/>
     <EditText
         android:id="@+id/et_password"

@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.google.gson.Gson;
 import com.squareup.sqlbrite.BriteDatabase;
-import com.squareup.sqlbrite.SqlBrite;
 import com.wind.data.login.model.LoginUser;
 import com.wind.data.login.model.LoginUserModel;
 import com.wind.data.login.response.LoginResponse;
@@ -34,39 +33,41 @@ public class LoginUserDbDataStore {
         String jsonUser=mGson.toJson(loginResponse);
         final BriteDatabase.Transaction transaction = mBriteDb.newTransaction();
         try {
-            final LoginUser.LoginUserMarshal marshal = new LoginUser.LoginUserMarshal();
 
-                mBriteDb.insert(LoginUser.TABLE_NAME, marshal.json_user(jsonUser).asContentValues(),
+                LoginUserModel.Marshal marshal=LoginUser.FACTORY.marshal();
+
+                mBriteDb.insert(LoginUser.TABLE_NAME, marshal.json_user(jsonUser)._id(0).asContentValues(),
                         SQLiteDatabase.CONFLICT_REPLACE);
-            //Log.e(TAG,"putLoginUser success");
             transaction.markSuccessful();
-        } finally {
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
             transaction.end();
         }
     }
 
     public Observable<LoginResponse> getLoginUser(){
-
         return mBriteDb.createQuery(LoginUser.TABLE_NAME,LoginUser.SELECT_LOGIN_USER)
-                .map(new Func1<SqlBrite.Query, LoginResponse>() {
+                .mapToOne(new Func1<Cursor, LoginResponse>() {
                     @Override
-                    public LoginResponse call(SqlBrite.Query query) {
+                    public LoginResponse call(Cursor cursor) {
+                        LoginResponse response=null;
+                        final BriteDatabase.Transaction transaction = mBriteDb.newTransaction();
                         try {
-                            Cursor cursor=query.run();
-                            if (cursor.moveToLast()){
-                                LoginUserModel model = LoginUser.MAPPER.map(cursor);
-                                String json = model.json_user();
-                                //Log.e(TAG, "getLoginUser" + json);
-                                Gson gson = new Gson();
-                                return gson.fromJson(json, LoginResponse.class);
-                            }else {
-                                return null;
-                            }
+                                //if (cursor.moveToLast()) {
+                                    LoginUserModel model = LoginUser.SELECT_LOGIN_USER_ROWMARPER.map(cursor);
+                                    String json = model.json_user();
+                                    //Log.e(TAG, "getLoginUser" + json);
+                                    Gson gson = new Gson();
+                                    response = gson.fromJson(json, LoginResponse.class);
+                               // }
 
                         }catch (Exception e){
                             e.printStackTrace();
+                        }finally {
+                            transaction.end();
                         }
-                        return null;
+                        return response;
                     }
                 });
     }

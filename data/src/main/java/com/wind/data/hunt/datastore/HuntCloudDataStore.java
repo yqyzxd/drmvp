@@ -61,7 +61,7 @@ public class HuntCloudDataStore implements HuntDataStore {
         map.put("token", request.getToken());
         map.put("page", String.valueOf(page));
         map.put("count", String.valueOf(request.getCount()));
-        map.put("version", "161");
+        map.put("version", "1.61");
         map.put("order_rand", "0");
         map.put("load_from", request.getLoadFrom() + "");
         return map;

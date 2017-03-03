@@ -2,8 +2,8 @@ package com.wind.drmvp.hunt.mvp.presenter;
 
 import com.wind.data.hunt.request.PermissionRequest;
 import com.wind.data.hunt.response.PermissionResponse;
-import com.wind.domain.Usecase;
-import com.wind.domain.UsecaseCompoment;
+import com.wind.base.usecase.Usecase;
+import com.wind.base.usecase.UsecaseCompoment;
 import com.wind.drmvp.base.ExecutePresenter;
 import com.wind.drmvp.hunt.mvp.view.ChatView;
 import com.wind.drmvp.hunt.subscriber.PermissionSubscriber;

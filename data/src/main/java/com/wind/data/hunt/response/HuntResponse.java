@@ -1,17 +1,18 @@
 package com.wind.data.hunt.response;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.google.gson.annotations.SerializedName;
-import com.wind.data.base.BaseResponse;
+import com.wind.base.response.PageResponse;
 import com.wind.data.hunt.bean.Hunt;
 
 /**
  * Created by wind on 16/5/20.
  */
-public class HuntResponse extends BaseResponse {
+public class HuntResponse extends PageResponse {
     @SerializedName("items")
+    @JSONField(name = "items")
     private Hunt hunt;
 
-    private boolean isFirstPage;
 
 
     public Hunt getHunt() {
@@ -23,11 +24,4 @@ public class HuntResponse extends BaseResponse {
     }
 
 
-    public boolean isFirstPage() {
-        return isFirstPage;
-    }
-
-    public void setFirstPage(boolean firstPage) {
-        isFirstPage = firstPage;
-    }
 }

@@ -5,7 +5,7 @@ import com.wind.data.hunt.request.LikeRequest;
 import com.wind.data.hunt.request.PermissionRequest;
 import com.wind.data.hunt.response.LikeResponse;
 import com.wind.data.hunt.response.PermissionResponse;
-import com.wind.domain.Usecase;
+import com.wind.base.usecase.Usecase;
 import com.wind.domain.hunt.interactor.LikeUsecase;
 import com.wind.domain.hunt.interactor.PermissionUsecase;
 import com.wind.drmvp.hunt.mvp.view.impl.LikeMvpLayout;

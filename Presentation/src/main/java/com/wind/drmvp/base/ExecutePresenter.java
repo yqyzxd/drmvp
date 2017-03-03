@@ -2,8 +2,8 @@ package com.wind.drmvp.base;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
-import com.wind.data.base.BaseRequest;
-import com.wind.domain.UsecaseManager;
+import com.wind.base.request.BaseRequest;
+import com.wind.base.usecase.UsecaseManager;
 
 /**
  * Created by wind on 16/9/11.

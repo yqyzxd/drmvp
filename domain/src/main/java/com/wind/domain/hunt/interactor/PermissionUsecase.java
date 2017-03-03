@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.wind.data.hunt.api.PermissionApi;
 import com.wind.data.hunt.request.PermissionRequest;
 import com.wind.data.hunt.response.PermissionResponse;
-import com.wind.domain.Usecase;
+import com.wind.base.usecase.Usecase;
 
 import java.util.HashMap;
 import java.util.Map;

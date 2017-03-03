@@ -1,21 +1,24 @@
 package com.wind.drmvp.hunt.mvp.view.impl;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wind.base.mvp.view.DaggerMvpFragment;
-import com.wind.data.base.BaseRequest;
+import com.wind.base.request.BaseRequest;
 import com.wind.data.hunt.request.HuntRequest;
 import com.wind.data.hunt.response.HuntResponse;
 import com.wind.data.login.request.LoginRequest;
 import com.wind.data.login.response.LoginResponse;
 import com.wind.drmvp.R;
 import com.wind.drmvp.base.App;
+import com.wind.drmvp.hunt.activity.UploadPhotosActivity;
 import com.wind.drmvp.hunt.adapter.HuntUsersAdapter;
 import com.wind.drmvp.hunt.di.HuntComponent;
 import com.wind.drmvp.hunt.mvp.presenter.HuntPresenter;
@@ -59,7 +62,14 @@ public class HuntFragment extends DaggerMvpFragment<HuntView,HuntPresenter,HuntC
         mAdapter=new HuntUsersAdapter(getActivity(),R.layout.hunt_item_user);
 
         contentView.setAdapter(mAdapter);
+        contentView.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(getActivity(), UploadPhotosActivity.class);
 
+                startActivity(intent);
+            }
+        });
         contentView.setMode(PullToRefreshBase.Mode.BOTH);
         contentView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override

@@ -1,11 +1,11 @@
 package com.wind.data.hunt.request;
 
-import com.wind.data.base.BaseRequest;
+import com.wind.base.request.PageRequest;
 
 /**
  * Created by wind on 16/5/20.
  */
-public class HuntRequest extends BaseRequest {
+public class HuntRequest extends PageRequest {
 
 
     private int page;

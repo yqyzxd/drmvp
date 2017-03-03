@@ -3,7 +3,7 @@ package com.wind.drmvp.login.di;
 import com.wind.base.di.annotation.ActivityScope;
 import com.wind.data.login.request.LoginRequest;
 import com.wind.data.login.response.LoginResponse;
-import com.wind.domain.Usecase;
+import com.wind.base.usecase.Usecase;
 import com.wind.domain.login.interactor.LoginUsecase;
 import com.wind.drmvp.login.activity.LoginActivity;
 

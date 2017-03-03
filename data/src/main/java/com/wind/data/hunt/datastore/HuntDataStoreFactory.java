@@ -1,7 +1,7 @@
 package com.wind.data.hunt.datastore;
 
 import com.wind.data.DataStore;
-import com.wind.data.base.BaseRequest;
+import com.wind.base.request.BaseRequest;
 import com.wind.data.base.cache.ICache;
 import com.wind.data.hunt.api.HuntApi;
 import com.wind.data.hunt.request.HuntRequest;

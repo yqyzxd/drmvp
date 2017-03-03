@@ -1,7 +1,7 @@
 package com.wind.data.base.cache;
 
 
-import com.wind.data.base.BaseResponse;
+import com.wind.base.response.BaseResponse;
 
 import java.io.File;
 

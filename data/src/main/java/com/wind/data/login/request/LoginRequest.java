@@ -1,6 +1,6 @@
 package com.wind.data.login.request;
 
-import com.wind.data.base.BaseRequest;
+import com.wind.base.request.BaseRequest;
 
 /**
  * Created by wind on 16/5/19.

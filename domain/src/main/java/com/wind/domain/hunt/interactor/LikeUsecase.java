@@ -3,7 +3,7 @@ package com.wind.domain.hunt.interactor;
 import com.wind.data.hunt.api.LikeApi;
 import com.wind.data.hunt.request.LikeRequest;
 import com.wind.data.hunt.response.LikeResponse;
-import com.wind.domain.Usecase;
+import com.wind.base.usecase.Usecase;
 
 import java.util.HashMap;
 import java.util.Map;

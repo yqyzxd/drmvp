@@ -1,5 +1,6 @@
 package com.wind.data.base.bean;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -8,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class UserInfo {
     private int id;
     @SerializedName("basic")
+    @JSONField(name = "basic")
     private BaseUserInfo baseUserInfo;
 
 
@@ -16,6 +18,7 @@ public class UserInfo {
     private SpouseCriteria mate;
 
     @SerializedName("more_info")
+    @JSONField(name = "more_info")
     private MoreInfo moreInfo;
 
     public BaseUserInfo getBaseUserInfo() {

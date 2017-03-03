@@ -2,7 +2,7 @@ package com.wind.drmvp.hunt.subscriber;
 
 import android.util.Log;
 
-import com.wind.data.base.BaseResponse;
+import com.wind.base.response.BaseResponse;
 import com.wind.data.hunt.response.HuntResponse;
 import com.wind.drmvp.hunt.mvp.view.HuntView;
 
