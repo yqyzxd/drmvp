@@ -47,11 +47,14 @@ dependencies {
     def developmentDependencies = rootProject.ext.developmentDependencies
 
     compile project(':domain')
+    compile project(':wheelpicker')
+    compile project(':photoview')
    // compile project(':data')
    // compile project(':base')
     compile project(path:':PullToRefreshLib')
     compile 'com.android.support:recyclerview-v7:24.2.0'
     compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:support-v4:24.2.0'
     apt presentationDependencies.daggerCompiler
     compile presentationDependencies.dagger
     provided presentationDependencies.javaxAnnotation

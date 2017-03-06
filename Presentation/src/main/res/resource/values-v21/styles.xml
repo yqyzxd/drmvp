@@ -1,18 +1,17 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <!-- 允许使用transitions -->
         <item name="android:windowContentTransitions">true</item>
+        <!-- enable window content transitions -->
+        <item name="android:windowActivityTransitions" tools:targetApi="lollipop">true</item>
+
     </style>
 
-    <style name="AppTheme.PhotoPreview">
 
-        <item name="android:windowAllowReturnTransitionOverlap">false</item>
-        <!--<item name="android:windowSharedElementEnterTransition">@transition/photo_preview_shared_enter</item>-->
-    </style>
 </resources>

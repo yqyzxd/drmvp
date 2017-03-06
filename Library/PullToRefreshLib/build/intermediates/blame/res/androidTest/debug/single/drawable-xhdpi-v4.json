@@ -8,12 +8,12 @@
         "source": "/Users/wind/StudioProjects/drmvp/Library/PullToRefreshLib/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/icon_pull_to_loading.png"
     },
     {
-        "merged": "/Users/wind/StudioProjects/drmvp/Library/PullToRefreshLib/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/default_ptr_rotate.png",
-        "source": "/Users/wind/StudioProjects/drmvp/Library/PullToRefreshLib/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/default_ptr_rotate.png"
-    },
-    {
         "merged": "/Users/wind/StudioProjects/drmvp/Library/PullToRefreshLib/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/icon_middle_loading.png",
         "source": "/Users/wind/StudioProjects/drmvp/Library/PullToRefreshLib/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/icon_middle_loading.png"
+    },
+    {
+        "merged": "/Users/wind/StudioProjects/drmvp/Library/PullToRefreshLib/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/default_ptr_rotate.png",
+        "source": "/Users/wind/StudioProjects/drmvp/Library/PullToRefreshLib/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/default_ptr_rotate.png"
     },
     {
         "merged": "/Users/wind/StudioProjects/drmvp/Library/PullToRefreshLib/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/default_ptr_flip.png",

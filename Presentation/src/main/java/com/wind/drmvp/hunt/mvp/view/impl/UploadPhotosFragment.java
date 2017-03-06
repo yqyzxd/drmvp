@@ -6,12 +6,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -44,6 +44,9 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+
+import static com.wind.drmvp.base.activity.PhotoPreviewActivity.EXTRA_KEY_CURRENT_POSITION;
+import static com.wind.drmvp.base.activity.PhotoPreviewActivity.EXTRA_KEY_START_POSITION;
 
 /**
  * Created by wind on 2017/3/1.
@@ -86,6 +89,7 @@ public class UploadPhotosFragment extends DaggerMvpFragment<UploadPhotosView, Up
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         init();
     }
 
@@ -95,12 +99,11 @@ public class UploadPhotosFragment extends DaggerMvpFragment<UploadPhotosView, Up
         mGvPhotos.setVisibility(View.VISIBLE);
         UploadPhoto photo = new UploadPhoto(R.drawable.mu_add_photo);
 
-        String path = "/storage/emulated/0/MarryU/ImgTmp/1486454961092.jpg";
-        UploadPhoto photo2 = new UploadPhoto(path);
-
         mAdapter.add(photo);
-        //mAdapter.add(photo2);
 
+       /* UploadPhoto photo2 = new UploadPhoto(R.drawable.longpic);
+        photo2.setPath("test");
+        mAdapter.add(photo2);*/
         mGvPhotos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -109,7 +112,7 @@ public class UploadPhotosFragment extends DaggerMvpFragment<UploadPhotosView, Up
                             .with(getActivity())
                             .image()
                             .multiple()
-                            .maxSize(8)
+                            .maxSize(9)
                             .imageLoader(ImageLoaderType.GLIDE)
                             .subscribe(new RxBusResultSubscriber<ImageMultipleResultEvent>() {
                                 @Override
@@ -125,13 +128,23 @@ public class UploadPhotosFragment extends DaggerMvpFragment<UploadPhotosView, Up
                             })
                             .openGallery();
                 } else {
-                    previewPhotos(position-1,view);
+                    View shareElement=view.findViewById(R.id.iv);
+                    previewPhotos(position-1,shareElement);
                 }
             }
         });
     }
 
+    public View findTransitionViewByTag(Object tag) {
 
+        return mGvPhotos.findViewWithTag(tag);
+    }
+
+    public Object getChindTag(int position) {
+        return mAdapter.getChildTag(position);
+        //String transitionName=mAdapter.getData().get(position).getPath();
+        //return transitionName;
+    }
     private void previewPhotos(final int position,final View shareElement) {
         List<UploadPhoto> photos = mAdapter.getData();
 
@@ -167,9 +180,8 @@ public class UploadPhotosFragment extends DaggerMvpFragment<UploadPhotosView, Up
                     public void onCompleted() {
                         Intent intent = new Intent(getActivity(), PhotoPreviewActivity.class);
                         intent.putExtra(PhotoPreviewActivity.EXTRA_KEY_PHOTOS, previews);
-                        intent.putExtra(PhotoPreviewActivity.EXTRA_KEY_POSITION, position);
-                        /*ActivityOptionsCompat options=AppCompat.makeSceneTransitionAnimation(getActivity(),shareElement);
-                        AppCompat.makeSceneTransitionAnimation()*/
+                        intent.putExtra(EXTRA_KEY_START_POSITION, position);
+
 
                         Pair pair1=Pair.create(shareElement, ViewCompat.getTransitionName(shareElement));
                         ActivityOptionsCompat options=ActivityOptionsCompat
@@ -268,10 +280,30 @@ public class UploadPhotosFragment extends DaggerMvpFragment<UploadPhotosView, Up
         super.onDestroyView();
     }
 
-    public static Fragment getInstance() {
+    public static UploadPhotosFragment getInstance() {
         UploadPhotosFragment fragment = new UploadPhotosFragment();
         return fragment;
     }
 
 
+    public void onActivityReenter(int resultCode, Intent data) {
+        Bundle tmpReenterState = new Bundle(data.getExtras());
+        int startingPosition = tmpReenterState.getInt(EXTRA_KEY_START_POSITION);
+        int currentPosition = tmpReenterState.getInt(EXTRA_KEY_CURRENT_POSITION);
+
+        if (startingPosition != currentPosition) {
+            mGvPhotos.smoothScrollToPosition(currentPosition);
+        }
+        ActivityCompat.postponeEnterTransition(getActivity());
+        mGvPhotos.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                mGvPhotos.getViewTreeObserver().removeOnPreDrawListener(this);
+                // TODO: figure out why it is necessary to request layout here in order to get a smooth transition.
+                mGvPhotos.requestLayout();
+                ActivityCompat.startPostponedEnterTransition(getActivity());
+                return true;
+            }
+        });
+    }
 }

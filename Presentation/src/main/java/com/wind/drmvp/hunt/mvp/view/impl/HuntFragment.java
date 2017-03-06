@@ -19,6 +19,7 @@ import com.wind.data.login.response.LoginResponse;
 import com.wind.drmvp.R;
 import com.wind.drmvp.base.App;
 import com.wind.drmvp.hunt.activity.UploadPhotosActivity;
+import com.wind.drmvp.hunt.activity.WheelPickerActivity;
 import com.wind.drmvp.hunt.adapter.HuntUsersAdapter;
 import com.wind.drmvp.hunt.di.HuntComponent;
 import com.wind.drmvp.hunt.mvp.presenter.HuntPresenter;
@@ -65,7 +66,13 @@ public class HuntFragment extends DaggerMvpFragment<HuntView,HuntPresenter,HuntC
         contentView.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getActivity(), UploadPhotosActivity.class);
+                Intent intent=null;
+                if (position==2){
+                    intent=new Intent(getActivity(), WheelPickerActivity.class);
+                }else {
+                    intent=new Intent(getActivity(), UploadPhotosActivity.class);
+                }
+
 
                 startActivity(intent);
             }

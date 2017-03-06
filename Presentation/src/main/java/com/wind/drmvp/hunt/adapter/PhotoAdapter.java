@@ -3,6 +3,7 @@ package com.wind.drmvp.hunt.adapter;
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
 import android.text.TextUtils;
+import android.util.SparseArray;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -17,8 +18,10 @@ import com.wind.drmvp.base.bean.UploadPhoto;
  */
 
 public class PhotoAdapter extends QuickAdapter<UploadPhoto> {
+    private SparseArray<Object> tags;
     public PhotoAdapter(Context context, int layoutResId) {
         super(context, layoutResId);
+        tags=new SparseArray();
     }
 
     @Override
@@ -26,20 +29,24 @@ public class PhotoAdapter extends QuickAdapter<UploadPhoto> {
         String path=item.getPath();
         int resId=item.getResId();
         ImageView iv=helper.getView(R.id.iv);
-
         if (TextUtils.isEmpty(path)){
-            //AppCompat.setTransitionName(helper.getView(),AppCompat.TRANSITION_NAME_DEFAULT);
-            ViewCompat.setTransitionName(helper.getView(),AppCompat.TRANSITION_NAME_DEFAULT);
+
+            ViewCompat.setTransitionName(iv, AppCompat.TRANSITION_NAME_DEFAULT);
             Glide.with(context)
                     .load(resId)
                     .into(iv);
         }else {
-            ViewCompat.setTransitionName(helper.getView(),path);
+           // iv.setTag(R.id.imageid,path);
+           ViewCompat.setTransitionName(iv,path);
             Glide.with(context)
                     .load(path)
                     .into(iv);
         }
+        tags.put(helper.getPosition(),iv.getTag());
 
+    }
 
+    public Object getChildTag(int position) {
+        return tags.get(position);
     }
 }

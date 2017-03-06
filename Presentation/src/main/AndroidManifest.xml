@@ -17,21 +17,21 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".login.activity.LoginActivity"
-
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"></action>
                 <category android:name="android.intent.category.LAUNCHER"></category>
             </intent-filter>
             </activity>
-
         <activity android:name=".hunt.activity.HuntActivity"></activity>
 
         <activity android:name=".hunt.activity.ChatActivity"></activity>
         <activity android:name="com.wind.drmvp.hunt.activity.UploadPhotosActivity"/>
 
         <activity android:name="com.wind.drmvp.base.activity.PhotoPreviewActivity"
-            android:theme="@style/AppTheme.PhotoPreview"/>
+           />
+
+        <activity android:name="com.wind.drmvp.hunt.activity.WheelPickerActivity"/>
         <activity
             android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
             android:screenOrientation="portrait"
